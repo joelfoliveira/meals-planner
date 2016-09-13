@@ -1,0 +1,12 @@
+{
+  "name": "Meal Planner",
+  "short_name": "Meal Planner",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
+  "display": "standalone",
+  "orientation": "portrait",
+  "Scope": "/",
+  "start_url": "/",
+  "icons": [],
+  "splash_pages": null
+}
