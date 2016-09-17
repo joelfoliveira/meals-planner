@@ -9,7 +9,7 @@ define([
 
     var AppRouter = Backbone.Router.extend({
         routes: {
-            'meals-form': 'showMealsForm',
+            'meals-form(/:id)': 'showMealsForm',
             'meals-calendar': 'showMealsCalendar',
             '*actions': 'defaultAction'
         }
@@ -18,7 +18,7 @@ define([
     var initialize = function(){
 
         var app_router = new AppRouter;
-        app_router.on('route:showMealsForm', function(){
+        app_router.on('route:showMealsForm', function(id){
             var mealsFormView = new MealsFormView();
             mealsFormView.render();
         });
@@ -26,12 +26,10 @@ define([
         app_router.on('route:showMealsCalendar', function(){
             var mealsCalendarView = new MealsCalendarView();
             mealsCalendarView.render();
-
         });
 
-        app_router.on('route:defaultAction', function (actions) {
+        app_router.on('route:defaultAction', function () {
             var mealsListView = new MealsListView();
-            mealsListView.render();
         });
 
         Backbone.history.start();

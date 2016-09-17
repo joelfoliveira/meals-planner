@@ -11,11 +11,15 @@ var myApp = new Framework7({
 var $$ = Dom7;
 var mainView = myApp.addView('.view-main');
 
+var mealsStore;
+
 require.config({
     paths: {
         jquery: '../frameworks/jquery-3.1.0.min',
         underscore: '../frameworks/underscore-min',
         backbone: '../frameworks/backbone-min',
+        localForageSync: "../frameworks/backbone.localForageSync",
+        localForage: '../frameworks/localforage.min',
         text: '../frameworks/text',
         templates: '../templates'
     }
@@ -32,8 +36,14 @@ define([
     'underscore',
     'backbone',
     'router',
-], function($, _, Backbone, Router){
+    'localForage'
+], function($, _, Backbone, Router, LocalForage){
     var initialize = function(){
+
+        mealsStore = LocalForage.createInstance({
+            name: "meals"
+        });
+
         Router.initialize();
     };
 
