@@ -21,6 +21,10 @@ define(function(){
                     return false;
                 }
 
+                if(model.attributes.success && typeof(model.attributes.success) != 'undefined'){
+                    delete model.attributes.success;
+                }
+
                 return true;
             };
 
@@ -42,7 +46,10 @@ define(function(){
             };
 
             var create = function(model, options){
-                update(model, options);
+                getNextKey(function(key){
+                    model.set("id", key);
+                    update(model, options);
+                });
             };
 
             var update = function(model, options){
@@ -59,6 +66,19 @@ define(function(){
                         options.success();
                     });
                 }
+            };
+
+            var getNextKey = function(callback){
+                store.keys(function(err, keys) {
+                    var max = 1;
+                    for(var i in keys){
+                        var key = parseInt(keys[i])
+                        if(Number.isInteger(key) && key > max){
+                            max = key
+                        }
+                    }
+                    callback(++max);
+                });
             };
 
             switch (method) {

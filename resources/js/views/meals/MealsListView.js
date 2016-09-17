@@ -17,6 +17,7 @@ define([
             };
 
             self.collection = new MealsCollection();
+            self.collection.changeSort('name');
             self.collection.fetch({success : fetchComplete});
         },
 

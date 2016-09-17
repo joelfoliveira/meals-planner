@@ -7,13 +7,17 @@
                 </a>
             </div>
             <div class="center sliding"><%= title %></div>
-            <% if (showDelete) { %>
             <div class="right">
+                <% if (editMode) { %>
                 <a class="link action-delete">
                     <i class="fa fa-trash"></i>
                 </a>
+                <% } else {%>
+                <a class="link action-save">
+                    <i class="fa fa-floppy-o"></i>
+                </a>
+                <% }%>
             </div>
-            <% } %>
         </div>
     </div>
     <div class="page-content">
@@ -26,7 +30,7 @@
                             <div class="item-inner">
                                 <div class="item-title label">Name</div>
                                 <div class="item-input">
-                                    <input type="text" placeholder="Meal Name" value="<%= mealName %>">
+                                    <input id="meal-name" type="text" placeholder="Meal Name" value="<%= mealName %>">
                                 </div>
                             </div>
                         </div>

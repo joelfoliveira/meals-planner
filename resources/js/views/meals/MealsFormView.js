@@ -32,15 +32,26 @@ define([
 
             var title = this.model ? 'Edit Meal' : 'New Meal';
             var mealName = this.model ? this.model.get('name') : '';
-            var showDelete = this.model ? true : false;
+            var editMode = this.model ? true : false;
 
             mainView.router.load({
-                content: template({title: title, mealName: mealName, showDelete: showDelete}),
+                content: template({title: title, mealName: mealName, editMode: editMode}),
                 animatePages: true,
                 pushState: true
             });
 
             this.setEvents();
+        },
+
+        createMeal: function(){
+            this.model = new MealModel({name: $$('#meal-name').val()});
+            if(this.model.isValid()){
+                this.model.save(null, {success: function(){
+                    mainRouter.navigate('/', true);
+                }});
+            }else{
+                appUi.alert('Please fill the meal details correctly.', '');
+            }
         },
 
         deleteMeal: function(){
@@ -53,6 +64,10 @@ define([
             var self = this;
             $$('.action-delete').off('click').on('click', function(){
                 self.showDeleteMealModal();
+            });
+
+            $$('.action-save').off('click').on('click', function(){
+                self.createMeal();
             });
         },
 
