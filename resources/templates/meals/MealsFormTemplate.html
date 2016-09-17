@@ -6,12 +6,14 @@
                     <i class="icon icon-back"></i>
                 </a>
             </div>
-            <div class="center sliding">Create/Edit Meal</div>
+            <div class="center sliding"><%= title %></div>
+            <% if (showDelete) { %>
             <div class="right">
-                <a href="#" class="link">
+                <a class="link action-delete">
                     <i class="fa fa-trash"></i>
                 </a>
             </div>
+            <% } %>
         </div>
     </div>
     <div class="page-content">
@@ -24,7 +26,7 @@
                             <div class="item-inner">
                                 <div class="item-title label">Name</div>
                                 <div class="item-input">
-                                    <input type="text" placeholder="Meal Name">
+                                    <input type="text" placeholder="Meal Name" value="<%= mealName %>">
                                 </div>
                             </div>
                         </div>

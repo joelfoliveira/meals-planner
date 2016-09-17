@@ -5,11 +5,13 @@
  }*/
 
 // Initialize your app
-var myApp = new Framework7({
+var appUi = new Framework7({
     router: false
 });
 var $$ = Dom7;
-var mainView = myApp.addView('.view-main');
+var mainView = appUi.addView('.view-main');
+
+var mainRouter;
 
 var mealsStore;
 

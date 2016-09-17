@@ -17,18 +17,17 @@ define([
 
     var initialize = function(){
 
-        var app_router = new AppRouter;
-        app_router.on('route:showMealsForm', function(id){
-            var mealsFormView = new MealsFormView();
-            mealsFormView.render();
+        mainRouter = new AppRouter;
+        mainRouter.on('route:showMealsForm', function(id){
+            var mealsFormView = new MealsFormView(id);
         });
 
-        app_router.on('route:showMealsCalendar', function(){
+        mainRouter.on('route:showMealsCalendar', function(){
             var mealsCalendarView = new MealsCalendarView();
             mealsCalendarView.render();
         });
 
-        app_router.on('route:defaultAction', function () {
+        mainRouter.on('route:defaultAction', function () {
             var mealsListView = new MealsListView();
         });
 

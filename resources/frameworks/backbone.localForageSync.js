@@ -2,23 +2,18 @@ define(function(){
 
     return {
         sync: function(store, method, model, options){
-
             if(store == null || typeof(store) == 'undefined'){
                 return;
             }
 
             options.success = options.success || function(){};
 
-            var validId = function(id){
-                return (!id || id.length === 0);
-            };
-
             var validModel = function(model){
                 if(model == null || typeof(model) == 'undefined'){
                     return false;
                 }
 
-                if(model.id == null || typeof(model.id) == 'undefined'){
+                if(model.id == null || typeof(model.id) == 'undefined' || model.id.length === 0){
                     return false;
                 }
 
@@ -29,9 +24,9 @@ define(function(){
                 return true;
             };
 
-            var getById = function(id, options){
-                if(validId(id)){
-                    store.getItem(id.toString(), function(err, value){
+            var getById = function(model, options){
+                if(validModel(model)){
+                    store.getItem(model.id.toString(), function(err, value){
                         options.success(value);
                     });
                 }
@@ -52,7 +47,7 @@ define(function(){
 
             var update = function(model, options){
                 if(validModel(model)){
-                    store.setItem(model.id.toString(), model.attributes, function(err, value){
+                    store.setItem(model.attributes.id.toString(), model.attributes, function(err, value){
                         options.success(value);
                     });
                 }
@@ -60,7 +55,7 @@ define(function(){
 
             var deleteItem = function(model, options){
                 if(validModel(model)){
-                    store.removeItem(model.id.toString(), function(){
+                    store.removeItem(model.attributes.id.toString(), function(){
                         options.success();
                     });
                 }
@@ -68,7 +63,7 @@ define(function(){
 
             switch (method) {
                 case "read":
-                    model.id != undefined ? getById(model.id, options) : getAll(options);
+                    model.id != undefined ? getById(model, options) : getAll(options);
                     break;
                 case "create":
                     create(model, options);
