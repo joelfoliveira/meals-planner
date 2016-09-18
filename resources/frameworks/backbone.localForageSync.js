@@ -29,12 +29,10 @@ define(function(){
                 return true;
             };
 
-            var getById = function(model, options){
-                if(validModel(model)){
-                    store.getItem(model.id.toString(), function(err, value){
-                        options.success(value);
-                    });
-                }
+            var getById = function(id, options){
+                store.getItem(id.toString(), function(err, value){
+                    options.success(value);
+                });
             };
 
             var getAll = function(options){
@@ -47,10 +45,17 @@ define(function(){
             };
 
             var create = function(model, options){
-                getNextKey(function(key){
-                    model.set("id", key);
+                if(typeof(model.attributes.id) != 'undefined')
+                {
                     update(model, options);
-                });
+                }
+                else
+                {
+                    getNextKey(function(key){
+                        model.set("id", key);
+                        update(model, options);
+                    });
+                }
             };
 
             var update = function(model, options){
@@ -84,7 +89,7 @@ define(function(){
 
             switch (method) {
                 case "read":
-                    model.id != undefined ? getById(model, options) : getAll(options);
+                    typeof(options.id) != 'undefined' && options.id.length > 0  ? getById(options.id, options) : getAll(options);
                     break;
                 case "create":
                     create(model, options);

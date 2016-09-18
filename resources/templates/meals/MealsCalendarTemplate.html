@@ -18,48 +18,16 @@
 	</div>
 	<div class="page-content">
 		<div class="content-block">
-			<div class="card">
-				<div class="card-header bg-cyan">Monday</div>
-				<div class="card-content">
-					<div class="card-content-inner">Arroz com Frango</div>
-				</div>
-			</div>
-			<div class="card">
-				<div class="card-header bg-cyan">Tuesday</div>
-				<div class="card-content">
-					<div class="card-content-inner">Bacalhau com Natas</div>
-				</div>
-			</div>
-            <div class="card">
-                <div class="card-header bg-cyan">Tuesday</div>
-                <div class="card-content">
-                    <div class="card-content-inner">Bacalhau com Natas</div>
+            <% if(planning != null && planning.get("dailyMeals") != null && planning.get("dailyMeals").length > 0){ %>
+                <% _.each(planning.get("dailyMeals"), function(day){ %>
+                <div class="card">
+                    <div class="card-header bg-cyan"><%= Utils.getDayOfTheWeekName(day.date.getDay()) %> - <%= Utils.outputDateAsYYYYMMDD(day.date) %></div>
+                    <div class="card-content">
+                        <div class="card-content-inner"><%= day.meal.name %></div>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-header bg-cyan">Tuesday</div>
-                <div class="card-content">
-                    <div class="card-content-inner">Bacalhau com Natas</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header bg-cyan">Tuesday</div>
-                <div class="card-content">
-                    <div class="card-content-inner">Bacalhau com Natas</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header bg-cyan">Tuesday</div>
-                <div class="card-content">
-                    <div class="card-content-inner">Bacalhau com Natas</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header bg-cyan">Tuesday</div>
-                <div class="card-content">
-                    <div class="card-content-inner">Bacalhau com Natas</div>
-                </div>
-            </div>
+                <% }); %>
+            <% } %>
 		</div>
 	</div>
     <a class="floating-button bg-cyan action-refresh">

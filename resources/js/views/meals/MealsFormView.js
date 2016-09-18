@@ -12,8 +12,8 @@ define([
             var self = this;
             if(id)
             {
-                var model = new MealModel({id: id});
-                model.fetch({success: function(model){
+                var model = new MealModel();
+                model.fetch({id: id, success: function(model){
                     self.model = model;
                     self.render();
                 }});

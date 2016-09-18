@@ -52,6 +52,10 @@
     color: #212121;
 }
 
+.meals-list .list-block .item-content .item-inner{
+    background-image: none;
+}
+
 .meals-calendar .card{
     margin-bottom: 24px;
 }

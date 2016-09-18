@@ -8,7 +8,8 @@ define([
 
         sync: function(method, model, options){
             LocalForageSync.sync(planningStore, method, model, options);
-        },
+        }
+
     });
 
     return PlanningModel;
