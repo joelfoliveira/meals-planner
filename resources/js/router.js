@@ -15,7 +15,7 @@ define([
         }
     });
 
-    var initialize = function(){
+    var initialize = function(delay){
 
         mainRouter = new AppRouter;
         mainRouter.on('route:showMealsForm', function(id){

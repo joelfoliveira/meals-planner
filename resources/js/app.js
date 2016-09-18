@@ -5,6 +5,8 @@ var $$;
 var mainView;
 var mainRouter;
 var mealsStore;
+var planningStore;
+var userSettingsStore;
 
 require.config({
     paths: {
@@ -30,8 +32,9 @@ define([
     'backbone',
     'router',
     'appSettings',
+    'seeders/Seeder',
     'localForage'
-], function($, _, Backbone, Router, AppSettings, LocalForage){
+], function($, _, Backbone, Router, AppSettings, Seeder, LocalForage){
 
     var initialize = function(){
 
@@ -43,7 +46,14 @@ define([
             unRegisterServiceWorker();
         }
 
-        Router.initialize();
+        setupGlobalErrorHandling();
+
+        databaseSeeding(function(seeding){
+            var delay = seeding ? 500 : 0;
+            setTimeout(function(){
+                Router.initialize(delay);
+            }, delay);
+        });
     };
 
     var setupGlobalVariables = function(){
@@ -57,6 +67,14 @@ define([
 
         mealsStore = LocalForage.createInstance({
             name: AppSettings.mealsStoreName
+        });
+
+        planningStore = LocalForage.createInstance({
+            name: AppSettings.planningStoreName
+        });
+
+        userSettingsStore = LocalForage.createInstance({
+            name: AppSettings.userSettingsStoreName
         });
     };
 
@@ -76,6 +94,45 @@ define([
                 }
             });
         }
+    };
+
+    var setupGlobalErrorHandling = function(){
+        // Track basic JavaScript errors
+        window.addEventListener('error', function(e) {
+            if(typeof(_gaq) != 'undefined' && _gaq){
+                _gaq.push(['_trackEvent', 'JavaScript Error', e.message, e.filename + ':  ' + e.lineno, true]);
+            }
+        });
+
+        // Track AJAX errors (jQuery API)
+        $(document).ajaxError(function(e, request, settings) {
+            if(typeof(_gaq) != 'undefined' && _gaq){
+                _gaq.push(['_trackEvent', 'Ajax error', settings.url, e.result, true]);
+            }
+        });
+    };
+
+    var databaseSeeding = function(callback){
+
+        callback = callback || function(){};
+
+        userSettingsStore.getItem('firstRun', function(err, value)
+        {
+            var seeding = false;
+
+            if(value !== false)
+            {
+                if(AppSettings.databaseSeedingActive)
+                {
+                    seeding = true;
+                    Seeder.seedMeals();
+                }
+
+                userSettingsStore.setItem('firstRun', false);
+            }
+
+            callback(seeding);
+        });
     };
 
     return {

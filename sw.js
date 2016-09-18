@@ -1,4 +1,5 @@
 
+// Service Worker configuration
 var sitePath = '/meals-planner/www';
 var cacheName = "meals-planner-dev20160910-14";
 
@@ -6,6 +7,7 @@ var cacheName = "meals-planner-dev20160910-14";
 importScripts(sitePath+'/resources/frameworks/offline-google-analytics-import.js');
 goog.offlineGoogleAnalytics.initialize();
 
+// Resource for the app to work offline
 var resourcesToCache = [
     sitePath+'/',
     sitePath+'/resources/frameworks/bootstrap/css/bootstrap.min.css',

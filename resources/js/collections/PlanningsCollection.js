@@ -2,14 +2,25 @@ define([
     'underscore',
     'backbone',
     'localForageSync',
-    'models/MealModel'
-], function(_, Backbone, LocalForageSync, MealModel){
-    var MealsCollection = Backbone.Collection.extend({
+    'models/MealModel',
+    'models/PlanningModel'
+], function(_, Backbone, LocalForageSync, MealModel, PlanningModel){
+    var PlanningsCollection = Backbone.Collection.extend({
 
         model: MealModel,
 
         initialize: function(){
             this.changeSort('name');
+        },
+
+        generatePlanning: function(meals, days){
+            days = days || 7;
+
+            if(meals == null || meals.length == 0){
+                return null;
+            }
+
+
         },
 
         sync: function(method, model, options){
@@ -30,5 +41,5 @@ define([
 
     });
 
-    return MealsCollection;
+    return PlanningsCollection;
 });

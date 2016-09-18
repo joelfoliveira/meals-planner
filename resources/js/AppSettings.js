@@ -3,7 +3,10 @@ define(function(){
         appRelativePath: '/meals-planner/www',
         debug: false,
         serviceWorkerActive: false,
+        databaseSeedingActive: true,
 
-        mealsStoreName: 'meals'
+        mealsStoreName: 'meals',
+        planningStoreName: 'planning',
+        userSettingsStoreName: 'userSettings'
     };
 });

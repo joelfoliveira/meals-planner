@@ -2,6 +2,7 @@ define(function(){
 
     return {
         sync: function(store, method, model, options){
+
             if(store == null || typeof(store) == 'undefined'){
                 return;
             }
