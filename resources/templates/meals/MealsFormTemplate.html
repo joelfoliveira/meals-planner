@@ -1,4 +1,4 @@
-<div data-page="meals-form" class="page navbar-fixed">
+<div data-page="meals-form" class="page navbar-fixed meals-form">
     <div class="navbar">
         <div class="navbar-inner">
             <div class="left">
@@ -8,15 +8,9 @@
             </div>
             <div class="center sliding"><%= title %></div>
             <div class="right">
-                <% if (editMode) { %>
-                <a class="link action-delete">
-                    <i class="fa fa-trash"></i>
-                </a>
-                <% } else {%>
                 <a class="link action-save">
                     <i class="fa fa-floppy-o"></i>
                 </a>
-                <% }%>
             </div>
         </div>
     </div>
@@ -39,4 +33,9 @@
             </div>
         </div>
     </div>
+    <% if (editMode) { %>
+    <a class="floating-button bg-cyan action-delete">
+        <i class="fa fa-trash"></i>
+    </a>
+    <% } %>
 </div>

@@ -8,11 +8,11 @@
 var appUi = new Framework7({
     router: false
 });
+
 var $$ = Dom7;
 var mainView = appUi.addView('.view-main');
 
 var mainRouter;
-
 var mealsStore;
 
 require.config({

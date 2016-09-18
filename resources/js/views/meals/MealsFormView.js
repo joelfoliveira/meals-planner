@@ -54,6 +54,17 @@ define([
             }
         },
 
+        updateMeal: function(){
+            this.model.set('name', $$('#meal-name').val());
+            if(this.model.isValid()){
+                this.model.save(null, {success: function(){
+                    mainRouter.navigate('/', true);
+                }});
+            }else{
+                appUi.alert('Please fill the meal details correctly.', '');
+            }
+        },
+
         deleteMeal: function(){
             this.model.destroy({success: function(){
                 mainRouter.navigate('/', true);
@@ -67,13 +78,17 @@ define([
             });
 
             $$('.action-save').off('click').on('click', function(){
-                self.createMeal();
+                if(self.model){
+                    self.updateMeal();
+                }else{
+                    self.createMeal();
+                }
             });
         },
 
         showDeleteMealModal: function(){
             var self = this;
-            appUi.alert('Are you sure you want to delete this meal?', 'Delete Meal', function(){
+            appUi.confirm('Are you sure you want to delete this meal?', 'Delete Meal', function(){
                 self.deleteMeal();
             });
         }

@@ -24,12 +24,13 @@ define([
 
         mainRouter.on('route:showMealsCalendar', function(){
             var mealsCalendarView = new MealsCalendarView();
-            mealsCalendarView.render();
         });
 
         mainRouter.on('route:defaultAction', function () {
             var mealsListView = new MealsListView();
         });
+
+
 
         Backbone.history.start();
     };

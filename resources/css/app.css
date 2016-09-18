@@ -1,0 +1,96 @@
+
+.bg-cyan{
+    background-color: #4DB6AC !important;
+}
+
+.floating-button i{
+    font-size: 21px;
+}
+
+.navbar{
+    height: 60px;
+}
+
+.navbar .center{
+    line-height: 58px;
+    height: 60px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+    z-index: 0;
+}
+
+.navbar .left, .navbar .right {
+    z-index: 1;
+}
+
+.navbar .fa{
+    font-size: 22px;
+    line-height: 60px;
+}
+
+.navbar-fixed .page-content{
+    padding-top: 60px;
+}
+
+.meals-list .list-block{
+    margin-top: 0px;
+}
+
+.meals-list .list-block .item-content{
+    min-height: 60px;
+}
+
+.meals-calendar .card{
+    margin-bottom: 24px;
+}
+
+.meals-calendar .card-header{
+    color: #fff;
+}
+
+@media print {
+
+    *{
+        font-size: 12px !important;
+    }
+
+    .navbar{
+        background: none;
+    }
+
+    .navbar .left, .navbar .right{
+        display: none;
+    }
+
+    .navbar .center{
+        font-size: 16px !important;
+        color: #000;
+        left: 10px !important;
+    }
+
+    .content-block{
+        margin-top: 0px;
+    }
+
+    .meals-calendar .card{
+        border: 1px solid #000;
+        box-shadow: none;
+    }
+
+    .meals-calendar .card-header{
+        background: none;
+        font-weight: bold;
+        color: #000;
+        padding: 5px 5px;
+        min-height: 0px;
+        border-bottom: 1px solid gray;
+        border-radius: 0px;
+    }
+
+    .meals-calendar .card-content-inner{
+        padding: 5px;
+    }
+}
