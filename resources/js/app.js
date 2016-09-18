@@ -1,17 +1,8 @@
-/*if('serviceWorker' in navigator) {
- navigator.serviceWorker
- .register('/meals-planner/www/sw.js')
- .then(function() { console.log("Service Worker Registered"); });
- }*/
 
-// Initialize your app
-var appUi = new Framework7({
-    router: false
-});
-
-var $$ = Dom7;
-var mainView = appUi.addView('.view-main');
-
+// Global Variables
+var appUi;
+var $$;
+var mainView;
 var mainRouter;
 var mealsStore;
 
@@ -38,15 +29,53 @@ define([
     'underscore',
     'backbone',
     'router',
+    'appSettings',
     'localForage'
-], function($, _, Backbone, Router, LocalForage){
+], function($, _, Backbone, Router, AppSettings, LocalForage){
+
     var initialize = function(){
 
-        mealsStore = LocalForage.createInstance({
-            name: "meals"
-        });
+        setupGlobalVariables();
+
+        if(AppSettings.serviceWorkerActive){
+            registerServiceWorker();
+        }else{
+            unRegisterServiceWorker();
+        }
 
         Router.initialize();
+    };
+
+    var setupGlobalVariables = function(){
+        appUi = new Framework7({
+            router: false
+        });
+
+        $$ = Dom7;
+
+        mainView = appUi.addView('.view-main');
+
+        mealsStore = LocalForage.createInstance({
+            name: AppSettings.mealsStoreName
+        });
+    };
+
+    var registerServiceWorker = function(){
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register(AppSettings.appRelativePath+'/sw.js')
+                .then(function() { console.log("Service Worker Registered"); });
+        }
+    };
+
+    var unRegisterServiceWorker = function(){
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(var i in registrations) {
+                    registrations[i].unregister()
+                }
+            });
+        }
     };
 
     return {

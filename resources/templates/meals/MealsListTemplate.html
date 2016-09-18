@@ -13,18 +13,28 @@
         <div>
             <div class="list-block">
                 <ul>
-                    <% _.each(meals, function(meal){ %>
-                    <li>
-                        <a class="item-link item-content" href="#/meals-form/<%= meal.get("id") %>">
-                            <div class="item-inner"><%= meal.get("name") %></div>
-                        </a>
-                    </li>
-                    <% }); %>
+                    <% if(meals.length > 0){ %>
+                        <% _.each(meals, function(meal){ %>
+                        <li>
+                            <a class="item-link item-content" href="#/meals-form/<%= meal.get("id") %>">
+                                <div class="item-inner"><%= meal.get("name") %></div>
+                            </a>
+                        </li>
+                        <% }); %>
+                    <% } else { %>
+                        <li>
+                            <a class="item-content">
+                            <div class="item-inner">Your meals list is empty. Please start by adding meals through the plus icon on the top right.</div>
+                            </a>
+                        </li>
+                    <% } %>
                 </ul>
             </div>
         </div>
     </div>
+    <% if(meals.length > 0){ %>
     <a href="#/meals-calendar" class="floating-button bg-cyan">
         <i class="fa fa-calendar"></i>
     </a>
+    <% } %>
 </div>

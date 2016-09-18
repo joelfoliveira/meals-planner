@@ -2,6 +2,10 @@
 var sitePath = '/meals-planner/www';
 var cacheName = "meals-planner-dev20160910-14";
 
+// Setup Google Analytics offline support
+importScripts(sitePath+'/resources/frameworks/offline-google-analytics-import.js');
+goog.offlineGoogleAnalytics.initialize();
+
 var resourcesToCache = [
     sitePath+'/',
     sitePath+'/resources/frameworks/bootstrap/css/bootstrap.min.css',

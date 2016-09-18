@@ -84,6 +84,17 @@ define([
                     self.createMeal();
                 }
             });
+
+            $('#meal-name').keyup(function(e){
+                if(e.keyCode == 13)
+                {
+                    if(self.model){
+                        self.updateMeal();
+                    }else{
+                        self.createMeal();
+                    }
+                }
+            });
         },
 
         showDeleteMealModal: function(){
