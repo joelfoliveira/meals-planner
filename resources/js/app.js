@@ -30,8 +30,8 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'router',
-    'appSettings',
+    'Router',
+    'AppSettings',
     'seeders/Seeder',
     'localForage'
 ], function($, _, Backbone, Router, AppSettings, Seeder, LocalForage){

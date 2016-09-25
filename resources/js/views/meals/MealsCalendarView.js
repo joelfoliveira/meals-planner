@@ -2,7 +2,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'utils',
+    'Utils',
     'models/MealModel',
     'collections/MealsCollection',
     'models/PlanningModel',

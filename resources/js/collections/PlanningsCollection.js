@@ -1,7 +1,7 @@
 define([
     'underscore',
     'backbone',
-    'utils',
+    'Utils',
     'localForageSync',
     'models/MealModel',
     'models/PlanningModel'
