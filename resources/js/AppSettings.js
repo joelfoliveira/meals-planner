@@ -2,7 +2,7 @@ define(function(){
     return {
         appRelativePath: '/meals-planner/www',
         debug: false,
-        serviceWorkerActive: true,
+        serviceWorkerActive: false,
         databaseSeedingActive: true,
         mealsStoreName: 'meals',
         planningStoreName: 'planning',

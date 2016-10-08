@@ -1,0 +1,27 @@
+<div class="popup meal-replace">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="center">Replace Meal</div>
+            <div class="right">
+                <a class="link close-popup">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="content-block">
+        <div class="list-block">
+            <ul>
+                <% if(meals.length > 0){ %>
+                <% _.each(meals, function(meal){ %>
+                <li>
+                    <a class="item-link item-content action-replace-meal" data-meal-id="<%= meal.get("id") %>">
+                        <div class="item-inner"><%= meal.get("name") %></div>
+                    </a>
+                </li>
+                <% }); %>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</div>

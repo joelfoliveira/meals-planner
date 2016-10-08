@@ -7,11 +7,14 @@ define([
     'collections/MealsCollection',
     'models/PlanningModel',
     'collections/PlanningsCollection',
-    'text!templates/meals/MealsCalendarTemplate.html'
-], function($, _, Backbone, Utils, MealModel, MealsCollection, PanningModel, PlanningsCollection, MealsCalendarTemplate){
+    'text!templates/meals/MealsCalendarTemplate.html',
+    'text!templates/meals/ReplaceMealPopup.html'
+], function($, _, Backbone, Utils, MealModel, MealsCollection, PanningModel, PlanningsCollection, MealsCalendarTemplate, ReplaceMealPopup){
     var mealsCalendarView = Backbone.View.extend({
 
         el : $(".main-page"),
+        mealIndexToReplace: 0,
+        mealsList: null,
 
         initialize:function() {
 
@@ -65,6 +68,27 @@ define([
             }});
         },
 
+        replaceMealAtIndex: function(index, newMeal)
+        {
+            var self = this;
+
+            console.log(1);
+            console.log(self.model);
+            if(typeof this.model == 'undefined' ||
+                typeof this.model.attributes == 'undefined' ||
+                typeof this.model.attributes.dailyMeals == 'undefined' ||
+                this.model.attributes.dailyMeals.length == 0)
+            {
+                return;
+            }
+
+            self.model.attributes.dailyMeals[index].meal = newMeal.attributes;
+            self.model.save();
+            self.render(false);
+
+            self.closeReplaceMealModel();
+        },
+
         print: function(){
             if(window.print){
                 window.print();
@@ -82,6 +106,27 @@ define([
             });
         },
 
+        showReplaceMealModel: function(){
+
+            var self = this;
+
+            var fetchComplete = function(mealsCollection) {
+                self.mealsList = mealsCollection.models;
+                var template = _.template(ReplaceMealPopup);
+                var popupHtml = template({meals: self.mealsList});
+                appUi.popup(popupHtml);
+                self.setEvents();
+            };
+
+            self.collection = new MealsCollection();
+            self.collection.changeSort('name');
+            self.collection.fetch({success : fetchComplete});
+        },
+
+        closeReplaceMealModel: function(){
+            appUi.closeModal();
+        },
+
         setEvents: function(){
             var self = this;
             $$('.action-print').off('click').on('click', function(){
@@ -90,6 +135,19 @@ define([
 
             $$('.action-refresh').off('click').on('click', function(){
                 self.showRefreshModal();
+            });
+
+            $$('.action-popup-replace-meal').off('click').on('click', function(){
+                var dayIndex = $$(this).data("day-index");
+                self.mealIndexToReplace = dayIndex;
+                self.showReplaceMealModel();
+            });
+
+            $$('.action-replace-meal').off('click').on('click', function(){
+                var mealId = $$(this).data("meal-id");
+                var plannings = new PlanningsCollection();
+                var meal = plannings.getMealById(mealId, self.mealsList);
+                self.replaceMealAtIndex(self.mealIndexToReplace, meal);
             });
         }
 

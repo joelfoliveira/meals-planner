@@ -1,7 +1,7 @@
 
 // Service Worker configuration
 var sitePath = '/meals-planner/www';
-var cacheName = "meals-planner-v0.28";
+var cacheName = "meals-planner-v0.29";
 
 //// Setup Google Analytics offline support
 importScripts(sitePath+'/resources/frameworks/offline-google-analytics-import.js');

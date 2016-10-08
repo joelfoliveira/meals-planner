@@ -14,6 +14,23 @@ define([
             this.changeSort('name');
         },
 
+        getMealById: function(id, meals)
+        {
+            var meal = null;
+            if(meals && meals.length > 0)
+            {
+                for(var i in meals)
+                {
+                    if(meals[i].attributes.id == id)
+                    {
+                        meal = meals[i];
+                    }
+                }
+            }
+
+            return meal;
+        },
+
         generatePlanning: function(meals, days){
             days = days || 7;
 
@@ -25,7 +42,6 @@ define([
             meals = meals.splice(0, days);
 
             var date = new Date();
-            date.setDate(date.getDate() + 1);
             var dailyMeals = [];
 
             for(var i in meals)

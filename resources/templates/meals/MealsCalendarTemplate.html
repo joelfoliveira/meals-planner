@@ -19,11 +19,14 @@
 	<div class="page-content">
 		<div class="content-block">
             <% if(planning != null && planning.get("dailyMeals") != null && planning.get("dailyMeals").length > 0){ %>
-                <% _.each(planning.get("dailyMeals"), function(day){ %>
+                <% _.each(planning.get("dailyMeals"), function(day, index){ %>
                 <div class="card">
                     <div class="card-header bg-cyan"><%= Utils.getDayOfTheWeekName(day.date.getDay()) %> - <%= Utils.outputDateAsYYYYMMDD(day.date) %></div>
-                    <div class="card-content">
-                        <div class="card-content-inner"><%= day.meal.name %></div>
+                    <div class="card-content action-popup-replace-meal" data-day-index="<%= index %>">
+                        <div class="card-content-inner">
+                            <span><%= day.meal.name %></span>
+                            <i class="fa fa-retweet icon-replace"></i>
+                        </div>
                     </div>
                 </div>
                 <% }); %>

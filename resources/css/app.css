@@ -64,6 +64,42 @@
     color: #fff;
 }
 
+.meals-calendar .card-content:nth-child(2){
+    border-top: none;
+}
+
+.meals-calendar .card-content{
+    border-top: 1px solid #c7c7c7;
+    cursor: pointer;
+}
+
+.meals-calendar .card-content .icon-replace{
+    font-size: 24px;
+    color: #757575;
+    position: relative;
+    top: -5px;
+    float: right;
+}
+
+.popup.meal-replace{
+    margin: 5%;
+    width: 90%;
+    height: 95%;
+}
+
+.popup.meal-replace .content-block{
+    margin: 0px;
+    padding: 0px;
+}
+
+.popup.meal-replace .content-block .list-block{
+    margin: 0px;
+}
+
+.popup.meal-replace .item-inner{
+    background-image: none;
+}
+
 @media only screen and (min-width : 768px) {
 
     html,body{

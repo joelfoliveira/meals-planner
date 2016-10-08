@@ -16,8 +16,8 @@
                     <% if(meals.length > 0){ %>
                         <% _.each(meals, function(meal){ %>
                         <li>
-                            <a class="item-link item-content" href="#/meals-form/<%= meal.get("id") %>">
-                                <div class="item-inner"><%= meal.get("name") %></div>
+                            <a class="item-link item-content" href="#/meals-form/<%= meal.get('id') %>">
+                                <div class="item-inner"><%= meal.get('name') %></div>
                             </a>
                         </li>
                         <% }); %>
