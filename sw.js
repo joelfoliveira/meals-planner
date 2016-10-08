@@ -40,7 +40,8 @@ var resourcesToCache = [
     sitePath+'/resources/js/Utils.js',
     sitePath+'/resources/templates/meals/MealsCalendarTemplate.html',
     sitePath+'/resources/templates/meals/MealsFormTemplate.html',
-    sitePath+'/resources/templates/meals/MealsListTemplate.html'
+    sitePath+'/resources/templates/meals/MealsListTemplate.html',
+    sitePath+'/resources/templates/meals/ReplaceMealPopup.html'
 ];
 
 self.addEventListener('install', function(e) {
